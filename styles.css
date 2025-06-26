@@ -1,0 +1,203 @@
+body {
+  background: rgb(119, 0, 255);
+  background: linear-gradient(
+    45deg,
+    rgba(119, 0, 255, 0.8575630935968137) 0%,
+    rgba(121, 9, 102, 0.8491597322522759) 100%
+  );
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --main-width: 8rem;
+}
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 5px;
+}
+
+.input-box {
+  width: var(--main-width);
+  height: var(--main-width);
+  background-color: rgba(0, 0, 0, 0.514);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x,
+.o {
+  color: white;
+  font-size: var(--main-width);
+}
+
+.x {
+  text-shadow: 0 0 5px rgb(3, 98, 241);
+}
+
+.o {
+  text-shadow: 0 0 5px rgb(233, 31, 16);
+}
+
+.reset_btn {
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(#464d55, #25292e);
+  border-radius: 8px;
+  border-width: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: expo-brand-demi, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 18px;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 32px;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 150ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 4rem;
+  font-weight: 600;
+}
+
+.reset_btn:hover {
+  box-shadow: rgba(0, 1, 0, 0.2) 0 2px 8px;
+  opacity: 0.85;
+}
+
+.reset_btn:active {
+  outline: 0;
+}
+
+.reset_btn:focus {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 3px;
+}
+
+@media (max-width: 420px) {
+  .reset_btn {
+    height: 48px;
+  }
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20rem;
+  row-gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.score-header {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+}
+
+.scoresX {
+  text-shadow: 0 0 5px rgb(3, 98, 241);
+}
+
+.scoresY {
+  text-shadow: 0 0 5px rgb(233, 31, 16);
+}
+
+@media only screen and (max-width: 600px) {
+  .grid-container2 {
+    column-gap: 10rem;
+    margin-bottom: 2rem;
+    row-gap: 1rem;
+  }
+  .input-box {
+    width: 4rem;
+    height: 4rem;
+  }
+  .grid-container {
+    gap: 2.5px;
+  }
+  .score-header {
+    padding: 0;
+    margin: 0;
+  }
+  .x,
+  .o {
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .grid-container2 {
+    column-gap: 5rem;
+    margin-bottom: 2rem;
+    row-gap: 1rem;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .grid-container2 {
+    column-gap: 10rem;
+    margin-bottom: 2rem;
+    row-gap: 1rem;
+  }
+  .input-box {
+    width: 4rem;
+    height: 4rem;
+  }
+  .grid-container {
+    gap: 2.5px;
+  }
+  .x,
+  .o {
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .input-box {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5px;
+  }
+  .grid-container {
+    gap: 1px;
+  }
+}
