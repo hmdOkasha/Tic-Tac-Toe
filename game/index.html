@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="score-header">Score</h2>
+      <div class="grid-container2">
+        <div class="scoresX scores top left">Player X</div>
+        <div class="scoresY scores top right">Player O</div>
+        <div class="middle">
+          <button class="reset_scores_btn">Reset Scores</button>
+        </div>
+        <div class="scoresX scores bottom left" id="ScoreX">0</div>
+        <div class="scoresY scores bottom right" id="ScoreO">0</div>
+      </div>
+      <button class="reset_btn">Reset</button>
+      <div class="modal">
+        <div class="overlay"></div>
+        <div class="modal-content">
+          <div class="player-win-title">
+            <h1 id="modalTitle">Player X has won</h1>
+          </div>
+          <div class="btnsContainer">
+            <button class="mainMenuBtn">Main Menu</button>
+            <button class="playAgainBtn">Play Again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

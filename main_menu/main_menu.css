@@ -1,0 +1,255 @@
+body {
+  background: rgb(119, 0, 255);
+  background: linear-gradient(
+    45deg,
+    rgba(119, 0, 255, 0.8575630935968137) 0%,
+    rgba(121, 9, 102, 0.8491597322522759) 100%
+  );
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.textContainer {
+  margin-top: 7rem;
+  display: flex;
+  justify-content: center;
+  font-size: 5rem;
+  font-weight: bold;
+  width: 100%;
+  color: white;
+  text-shadow: 0 0 5px rgb(233, 31, 16);
+  text-align: center;
+}
+
+.gridsContainer {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8rem;
+}
+
+.gridsContainer > div {
+  width: 20rem;
+  height: 22rem;
+  border: 3px solid black;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.gridsContainer > div:hover {
+  opacity: 0.8;
+}
+
+.gridsContainer > div > div {
+  color: white;
+  text-shadow: 0 0 5px rgb(3, 98, 241);
+}
+
+.grid-container3x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 0.2rem;
+  margin-top: 1rem;
+}
+
+.input-box3x3 {
+  width: 5rem;
+  height: 5rem;
+  background-color: rgba(0, 0, 0, 0.514);
+  border-radius: 8px;
+}
+
+.grid-container4x4 {
+  display: grid;
+  grid-template-columns: repeat(4, 61px);
+  gap: 0.2rem;
+  margin-top: 1rem;
+}
+
+.input-box4x4 {
+  width: 3.8rem;
+  height: 3.8rem;
+  background-color: rgba(0, 0, 0, 0.514);
+  border-radius: 6px;
+}
+
+.grid-container5x5 {
+  display: grid;
+  grid-template-columns: repeat(5, 48px);
+  gap: 0.2rem;
+  margin-top: 1rem;
+}
+
+.input-box5x5 {
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.514);
+  border-radius: 6px;
+}
+
+.chooseText {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.gridsContainer > .customGrid {
+  justify-content: flex-start;
+  padding-top: 1rem;
+  position: relative;
+  cursor: auto;
+  margin-bottom: 5rem;
+}
+
+.gridsContainer > .customGrid:hover {
+  opacity: 1;
+}
+
+.customGridSelect,
+.playButton {
+  background-color: initial;
+  background-image: linear-gradient(#464d55, #25292e);
+  border-radius: 8px;
+  border-width: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  flex-direction: column;
+  font-family: expo-brand-demi, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 18px;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 150ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-weight: 600;
+}
+
+.customGridSelect {
+  position: relative;
+  margin-top: 1.5rem;
+  width: 15rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.514);
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  padding-left: 0.5rem;
+  font-size: 2rem;
+  /* padding: 0 32px; */
+}
+
+.customGridSelect::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-top: 0.5rem solid white;
+  position: absolute;
+  right: 0.5rem;
+  top: 1rem;
+}
+
+.emptyOption {
+  height: 47px;
+}
+
+.dropDownList {
+  display: none;
+  position: absolute;
+  top: 100%; /* Appears just below .customGridSelect */
+  left: 0;
+  width: 100%;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  z-index: 999;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-image: linear-gradient(#464d55, #25292e);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.dropDownWrapper {
+  position: relative; /* Ensures .dropDownList stays contained */
+}
+
+.dropDownList--isActive {
+  display: block;
+}
+.dimensions {
+  z-index: 1000;
+  font-size: 2rem;
+}
+
+.dimensions:hover {
+  opacity: 0.8;
+}
+
+.customGridSelect--isActive {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.playButton {
+  position: absolute;
+  bottom: 1.5rem;
+  z-index: 0;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.playButton:hover {
+  box-shadow: rgba(0, 1, 0, 0.2) 0 2px 8px;
+  opacity: 0.85;
+}
+
+.playButton:active {
+  outline: 0;
+}
+
+.playButton:focus {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 3px;
+}
+
+.errorMessage {
+  display: none;
+  font-size: 1.2rem;
+  color: red;
+  text-shadow: none;
+  margin-top: 2.7rem;
+  font-weight: 600;
+}
+
+.errorMessage--isActive {
+  display: block;
+}
