@@ -20,11 +20,24 @@ const resetScoresBtn = document.querySelector('.reset_scores_btn');
 let currentPlayer = 'X';
 let turn = true;
 let turnCount = 0;
-let count = 0;
 
 let playerStartFirst = true;
 let scoreX = 0;
 let scoreO = 0;
+
+const checkWinLength = (rowsNumber) => {
+  let winLength = 3;
+  if(rowsNumber === 3) {
+    winLength = 3;
+  }
+  else if(rowsNumber > 3 && rowsNumber < 9) {
+    winLength = 4;
+  }
+  else {
+    winLength = 5;
+  }
+  return winLength
+}
 
 const showModal = (text) => {
   modal.classList.add('modal--isActive');
@@ -102,15 +115,13 @@ const resetGame = (resetGameFlag, resetScoresFlag) => {
 }
 
 const hasWon = () => {
-  if(count === rowsNumber){
-    let winner = currentPlayer
+    let winner = currentPlayer;
     setTimeout(() => {
       showModal(`Player ${winner} has won`);
       updateScores();
       resetGame(true, false);
     }, 200)
     return true;
-  }
 }
 
 const checkDraw = () => {
@@ -122,73 +133,116 @@ const checkDraw = () => {
   }
 }
 
-const checkRow = () => {
+const checkRow = (winLength) => {
   for(let row = 0; row < rowsNumber; row++){
+    let count = 0;
     for(let column = 0; column < rowsNumber; column++){
-      if(board[row][column] === currentPlayer)
+      if(board[row][column] === currentPlayer) {
         count++;
+        if(count === winLength) {
+          hasWon();
+          return;
+        }
+      } else {
+        count = 0;
+      }
+    }
+  }
+}
+
+const checkColumn = (winLength) => {
+  for (let col = 0; col < rowsNumber; col++) {
+    let count = 0;
+    for (let row = 0; row < rowsNumber; row++) {
+      if (board[row][col] === currentPlayer) {
+        count++;
+        if (count === winLength) {
+          hasWon();
+          return;
+        }
+      } else {
+        count = 0;
+      }
+    }
+  }
+};
+
+
+const checkDiagonal = (winLength) => {
+  let count = 0;
+  let count2 = 0;
+  for(let i = 0; i <= (rowsNumber - winLength); i++){
+    let temp = i;
+    for(let j = 0; j < rowsNumber - i; j++) {
+      if(board[temp][j] === currentPlayer) {
+        count++;
+        if(count === winLength) {
+          hasWon();
+          return;
+        }
+      } 
       else {
         count = 0;
-        break;
       }
-      hasWon();
+      if(board[j][temp] === currentPlayer) {
+        count2++;
+        if(count2 === winLength) {
+          hasWon();
+          return;
+        }
+      } 
+      else {
+        count2 = 0;
+      }
+      temp++;
     }
   }
 }
 
-const checkColumn = () => {
-  for(let column = 0; column < rowsNumber; column++){
-    for(let row = 0; row < rowsNumber; row++){
-      if(board[row][column] === currentPlayer)
+
+const checkReverseDiagonal = (winLength) => {
+  let count = 0;
+  let count2 = 0;
+  for(let i = 0; i <= (rowsNumber - winLength); i++){
+    let temp = i;
+    let temp2 = 0;
+    let temp4 = rowsNumber - (i + 1);
+    for(let j = rowsNumber - 1; j >= i; j = j - 1) {
+    let temp3 = j - 1;
+      if(board[temp][j] === currentPlayer) {
         count++;
-      else{
+        if(count === winLength) {
+          hasWon();
+          return;
+        }
+      } 
+      else {
         count = 0;
-        break;
       }
-      hasWon();
+      if(board[temp2][temp4] === currentPlayer) {
+        count2++;
+        console.log(count2);
+        if(count2 === winLength) {
+          hasWon();
+          return;
+        }
+      } 
+      else {
+        count2 = 0;
+      }
+      temp++;
+      temp2++;
+      temp4 = temp4 - 1;
     }
   }
-}
+};
 
-const checkMainDiagonal = () => {
-  let startingRow = 0;
-  let startingColumn = 0;
-  for(let i = 0; i < rowsNumber; i++){
-    if(board[startingRow][startingColumn] === currentPlayer){
-      count++;
-      startingRow++;
-      startingColumn++;
-    }
-    else{
-      count = 0;
-      break;
-    }
-    hasWon();
-  }
-}
 
-const checkReverseDiagonal = () => {
-  let startingRow = 0;
-  let startingColumn = rowsNumber - 1;
-  for(let i = 0; i < rowsNumber; i++){
-    if(board[startingRow][startingColumn] === currentPlayer){
-      count++;
-      startingColumn--;
-      startingRow++
-    }
-    else{
-      count = 0;
-      break;
-    }
-    hasWon();
-  }
-}
-
-const checkWin = () => {
-    checkRow();
-    checkColumn();
-    checkMainDiagonal();
-    checkReverseDiagonal();
+const checkWin = (winLength) => {
+    checkRow(winLength);
+    checkColumn(winLength);
+    checkDiagonal(winLength);
+    checkReverseDiagonal(winLength);
 }
 
 const turnAfterRoundEnd = () => {
@@ -228,6 +282,7 @@ setPlayersScore();
 const cells = gridSelected.querySelectorAll('.input-box');
 let array = createBoardArr();
 let board = createBoard(rowsNumber);
+let winLength = checkWinLength(rowsNumber);
 
 reset.addEventListener('click', () => resetGame(false, false));
 resetScoresBtn.addEventListener('click', resetScores)
@@ -244,15 +299,19 @@ const cellClickHandler = (eventTrigger) => {
               event.currentTarget.insertAdjacentHTML('afterbegin', x);
               board[i][j] = 'X';
               currentPlayer = 'X';
+                console.log(currentPlayer);
+
             }
             else{
               event.currentTarget.insertAdjacentHTML('afterbegin', o);
               board[i][j] = 'O';
               currentPlayer = 'O';
+                console.log(currentPlayer);
+
             }
             turnCount += 1;
             turn = !turn;
-            checkWin();
+            checkWin(winLength);
             checkDraw();
           }
         }
